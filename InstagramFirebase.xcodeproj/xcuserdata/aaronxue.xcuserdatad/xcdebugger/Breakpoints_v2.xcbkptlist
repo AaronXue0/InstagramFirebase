@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InstagramFirebase/AppDelegate.swift"
-            timestampString = "593241704.196839"
+            timestampString = "593732540.3247761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InstagramFirebase/AppDelegate.swift"
-            timestampString = "593241704.196921"
+            timestampString = "593732540.325009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InstagramFirebase/AppDelegate.swift"
-            timestampString = "593241704.196982"
+            timestampString = "593732540.325067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "AppDelegate"
             landmarkType = "3">
          </BreakpointContent>

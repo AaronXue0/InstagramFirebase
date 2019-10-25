@@ -19,7 +19,7 @@ final class ViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         button.addTarget(self, action: #selector(handlePlusPhoto), for: .touchUpInside)
         return button
     }()
-
+    
     @objc func handlePlusPhoto(){
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -27,10 +27,22 @@ final class ViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        let originalImage = info["UIImagePickControllerOriginalImage"] as? UIImage
+        if let editedImage = info[.editedImage] as? UIImage{
+            plusPhotoButton.setImage(editedImage, for: .normal)
+        }
+        else if let originalImage = info[.originalImage] as? UIImage {
+            print(originalImage)
+            plusPhotoButton.setImage(originalImage, for: .normal)
+        }
         
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244).cgColor
+        plusPhotoButton.layer.borderWidth = 1
+        
+        dismiss(animated: true, completion: nil)
     }
     
     lazy var emailTextField: UITextField = {
@@ -43,11 +55,11 @@ final class ViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         
         return tf
     }()
-
+    
     @objc func handleTextInputChange(){
         let isFormVaild = emailTextField.text?.count ?? 0 > 0 &&
-                          usernameTextField.text?.count ?? 0 > 0 &&
-                          passwordTextField.text?.count ?? 0 > 0
+            usernameTextField.text?.count ?? 0 > 0 &&
+            passwordTextField.text?.count ?? 0 > 0
         
         if isFormVaild {
             singUpButton.isEnabled = true
@@ -67,7 +79,7 @@ final class ViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
-
+    
     lazy var passwordTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Password"
@@ -78,7 +90,7 @@ final class ViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
-
+    
     lazy var singUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sing Up", for: .normal)
@@ -104,19 +116,40 @@ final class ViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                 return
             }
             print("Successfully created user: ", user?.user.uid ?? "")
-            guard let uid = user?.user.uid else { return }
             
-            let usernameValues = ["username": username]
-            let values = [uid: usernameValues]
+            guard let image = self.plusPhotoButton.imageView?.image else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
             
-            Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
-                if let err = err{
-                    print("Failed to save user info into DB \(err)")
-                    self.signupResult = "Make sure the format is correct"
+            
+            let filename = NSUUID().uuidString
+            let storageRef = Storage.storage().reference()
+            let imageRef = storageRef.child("Profile_image").child(filename)
+            _ = imageRef.putData(uploadData, metadata: nil, completion: { (metadata, err) in
+                if let err = err {
+                    print("Failed, ", err)
                     return
                 }
-                print("Successfully saved user info")
-                self.signupResult = "Hello \(username)"
+                
+                imageRef.downloadURL(completion: { (url, err) in
+                    guard let downloadurl = url else {
+                        print("URL Error")
+                        return
+                    }
+                    print("Successfullty get URL", downloadurl)
+                })
+                guard let uid = user?.user.uid else { return }
+                //It should be "let dictionaryValue = ["username": username, "profileImageUrl": url]"
+                let name = ["username": username] as [String : Any]
+                let Values = [uid: name]
+                Database.database().reference().child("users").updateChildValues(Values, withCompletionBlock: { (err, ref) in
+                    if let err = err{
+                        print("Failed to save user info into DB \(err)")
+                        self.signupResult = "Make sure the format is correct"
+                        return
+                    }
+                    print("Successfully saved user info")
+                    self.signupResult = "Hello \(username)"
+                })
             })
         })
     }
@@ -135,9 +168,9 @@ final class ViewController: UIViewController,UIImagePickerControllerDelegate,UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.addSubview(plusPhotoButton)
-
+        
         plusPhotoButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 40, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 140, height: 140)
         plusPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
@@ -160,9 +193,8 @@ final class ViewController: UIViewController,UIImagePickerControllerDelegate,UIN
                          paddingTop: 20, paddingLeft: 40,
                          paddingBottom: 0, paddingRight: -40, width: 0, height: 200 )
     }
-
+    
 }
-
 
 extension UIView {
     func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?,

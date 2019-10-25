@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		63807CF9466B2ABFF39912D5 /* Pods_InstagramFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682D767F4D93491B9034776D /* Pods_InstagramFirebase.framework */; };
 		98981978235C257F0076F60F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98981977235C257F0076F60F /* GoogleService-Info.plist */; };
+		98D191FA236382750007A7CA /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D191F9236382750007A7CA /* MainTabBarController.swift */; };
+		98D191FC2363858D0007A7CA /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D191FB2363858D0007A7CA /* UserProfileController.swift */; };
 		98D9065A2358F02700D4AD7C /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98D906592358F02700D4AD7C /* Asset.xcassets */; };
 		98D906602358FFD500D4AD7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98D9065F2358FFD500D4AD7C /* Main.storyboard */; };
 		98D906632359123500D4AD7C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D906622359123500D4AD7C /* Extensions.swift */; };
@@ -22,6 +24,8 @@
 		682D767F4D93491B9034776D /* Pods_InstagramFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE39A0F53C25EEDFC3DC482 /* Pods-InstagramFirebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramFirebase.debug.xcconfig"; path = "Target Support Files/Pods-InstagramFirebase/Pods-InstagramFirebase.debug.xcconfig"; sourceTree = "<group>"; };
 		98981977235C257F0076F60F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		98D191F9236382750007A7CA /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		98D191FB2363858D0007A7CA /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		98D906592358F02700D4AD7C /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
 		98D9065F2358FFD500D4AD7C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		98D906622359123500D4AD7C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 			children = (
 				98D906612359120F00D4AD7C /* Utils */,
 				98F46554235326C4009AE01B /* AppDelegate.swift */,
+				98D191F9236382750007A7CA /* MainTabBarController.swift */,
+				98D191FB2363858D0007A7CA /* UserProfileController.swift */,
 				98F46556235326C4009AE01B /* ViewController.swift */,
 				98D906592358F02700D4AD7C /* Asset.xcassets */,
 				98D9065F2358FFD500D4AD7C /* Main.storyboard */,
@@ -220,6 +226,8 @@
 			files = (
 				98F46557235326C4009AE01B /* ViewController.swift in Sources */,
 				98D906632359123500D4AD7C /* Extensions.swift in Sources */,
+				98D191FA236382750007A7CA /* MainTabBarController.swift in Sources */,
+				98D191FC2363858D0007A7CA /* UserProfileController.swift in Sources */,
 				98F46555235326C4009AE01B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
